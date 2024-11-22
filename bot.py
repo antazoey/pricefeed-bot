@@ -15,12 +15,13 @@ def bot_startup(startup_state: StateSnapshot):
 
 @bot.on_(BTC_USD_PRICE_FEED.AnswerUpdated)
 def exec_AnswerUpdated(log):
-    show_answer(log.answer, "AnswerUpdated")
+    show_answer(log.current, "AnswerUpdated")
 
 
 @bot.on_(BTC_USD_PRICE_FEED.NewRound)
 def exec_NewRound(log):
-    show_answer(log.answer, "NewRound")
+    round_data = BTC_USD_PRICE_FEED.latestRoundData()
+    show_answer(round_data.answer, "New Round")
 
 
 def show_answer(answer: int, trigger: str):
